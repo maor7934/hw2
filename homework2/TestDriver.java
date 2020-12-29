@@ -309,10 +309,27 @@ public class TestDriver {
   		
   		// TODO: Insert your code here.
   		   
-  		// ___ = graphs.get(graphName);
-  		// ___ = nodes.get(sourceArgs.get(i));
-  		// ___ = nodes.get(destArgs.get(i));
-  		// output.println(...);
+  		Graph<WeightedNode> current_graph = graphs.get(graphName);
+  		ArrayList<WeightedNodePath> start_points = new ArrayList<WeightedNodePath>();
+  		ArrayList<WeightedNodePath> end_points = new ArrayList<WeightedNodePath>();
+  		for (int i = 0; i < sourceArgs.size();i++) {
+  			start_points.add(new WeightedNodePath(nodes.get(sourceArgs.get(i))));
+  		}
+  		for (int i = 0; i < destArgs.size();i++) {
+  			end_points.add(new WeightedNodePath(nodes.get(destArgs.get(i))));
+  		}
+  		PathFinder<WeightedNode,WeightedNodePath> find_path =
+  					new PathFinder<WeightedNode,WeightedNodePath>(current_graph,start_points, end_points);
+  		WeightedNodePath shortest_path = find_path.FindShortestPath();
+  		if (shortest_path != null) {
+  			output.print("shortest path in "+graphName+":");
+  	  		for (WeightedNode wn : shortest_path) {
+  	  		output.print(" "+wn.getName());
+  	  		}
+  	  		output.println();
+  		} else {
+  			output.println("no path found in " + graphName);
+  		}
 		
   	}
 
