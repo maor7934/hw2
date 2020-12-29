@@ -131,9 +131,9 @@ public class TestDriver {
  	private void createNode(String nodeName, String cost) {
 
  		// TODO: Insert your code here.
- 		WeightedNode newNode = new WeightedNode(nodeName,Integer.parseInt(cost));
+ 		WeightedNode new_node = new WeightedNode(nodeName,Integer.parseInt(cost));
  		//nodes.put(nodeName, new WeightedNode(nodeName,cost));
- 		nodes.put(nodeName, newNode);
+ 		nodes.put(nodeName, new_node);
  		output.println("created node "+nodeName+" with cost "+cost);
  		
   	}
@@ -154,13 +154,13 @@ public class TestDriver {
   	private void addNode(String graphName, String nodeName) {
 
   		// TODO: Insert your code here.
-  		Graph<WeightedNode> currentGraph = graphs.get(graphName);
-  		WeightedNode currentWNode = nodes.get(nodeName);
-  		if (currentGraph == null || currentWNode == null) {
+  		Graph<WeightedNode> current_graph = graphs.get(graphName);
+  		WeightedNode current_node = nodes.get(nodeName);
+  		if (current_graph == null || current_node == null) {
   			output.println("--E-- TestDriver::addNode: shoudn't get here! graph or node doesn't exists");
   			return;
   		}
-  		currentGraph.addNode(currentWNode);
+  		current_graph.addNode(current_node);
   		// ___ = graphs.get(graphName);
   		// ___ = nodes.get(nodeName);
   		output.println("added node "+nodeName+" to "+graphName);
@@ -184,14 +184,14 @@ public class TestDriver {
 		
 		// TODO: Insert your code here.
 		
-		Graph<WeightedNode> currentGraph = graphs.get(graphName);
-		WeightedNode parentWNode  = nodes.get(parentName);
-		WeightedNode childWNode  = nodes.get(childName);
-  		if (currentGraph == null || parentWNode == null || childWNode == null) {
+		Graph<WeightedNode> current_graph = graphs.get(graphName);
+		WeightedNode parent__node  = nodes.get(parentName);
+		WeightedNode child_node  = nodes.get(childName);
+  		if (current_graph == null || parent__node == null || child_node == null) {
   			output.println("--E-- TestDriver::addEdge: shoudn't get here! graph or p c node doesn't exists");
   			return;
   		}
-  		if (!currentGraph.addEdge(parentWNode, childWNode)) {
+  		if (!current_graph.addEdge(parent__node, child_node)) {
   			output.println("--E-- TestDriver::addEdge: shoudn't get here! the graph doesn't contain the child");
   			return;
   		}
@@ -216,9 +216,20 @@ public class TestDriver {
   		
   		// TODO: Insert your code here.
   		   
-  		// ___ = graphs.get(graphName);
-  		// output.println(...);
-
+  		Graph<WeightedNode> current_graph = graphs.get(graphName);
+  		ArrayList<WeightedNode> current_graph_nodes_list = current_graph.getNodes();
+  		ArrayList<String> nodes_name_list = new ArrayList<String>();
+  		
+  		for (WeightedNode currNode : current_graph_nodes_list) {
+  			nodes_name_list.add(currNode.getName());
+  		}
+  		Collections.sort(nodes_name_list);
+  		output.print(graphName+" contains:");
+  		for (String curr_node_name : nodes_name_list) {
+  			output.print(" "+curr_node_name);
+  		}
+  		output.println();
+  		
   	}
 
 
@@ -237,10 +248,21 @@ public class TestDriver {
   	private void listChildren(String graphName, String parentName) {
 
   		// TODO: Insert your code here.
-  		    
-  		// ___ = graphs.get(graphName);
-  		// ___ = nodes.get(parentName);
-  		// output.println(...);
+  		
+  		Graph<WeightedNode> current_graph = graphs.get(graphName);
+  		WeightedNode parent_node = nodes.get(parentName);
+  		ArrayList<WeightedNode> children_of_current_Parent_List = current_graph.getChildren(parent_node);
+  		ArrayList<String> children_list_of_names = new ArrayList<String>();
+  		for (WeightedNode curr_node : children_of_current_Parent_List) {
+  			children_list_of_names.add(curr_node.getName());
+  		}
+  		Collections.sort(children_list_of_names);
+  		output.print("the children of "+parentName+" in " + graphName+" are:");
+  		for (String curr_child_name : children_list_of_names) {
+  			output.print(" "+curr_child_name);
+  		}
+  		output.println();
+  		
   		
   	}
 
