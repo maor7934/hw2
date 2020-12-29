@@ -16,7 +16,6 @@ public class Graph<T> {
 				"Rep. Inv. of class is violeted";
 	}
 	
-	
 	private HashMap<T, HashSet<T>> nodeCollection;
 	
 	//TODO: maybe for checkrep? 
@@ -79,9 +78,9 @@ public class Graph<T> {
    	 * @modifies none
    	 * @return set of the nodes in the graph.
    	 **/
-	public Set<T> getNodes(){
+	public ArrayList<T> getNodes(){
 		checkRep();
-		return this.nodeCollection.keySet(); //TODO: maybe return hard copy of nodes?
+		return new ArrayList<T>(this.nodeCollection.keySet()); //TODO: maybe return hard copy of nodes?
 	}
 	
   	/**
