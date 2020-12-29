@@ -30,7 +30,7 @@ public class Graph<T> {
      * @requires none
    	 * @effects Adds the edge into the graph (adds new object).
    	 * @modifies this object.
-   	 **/
+   	 **/// as
 	public Boolean addEdge(T parentNode, T childNodeName) {
 		if (this.nodeCollection.containsKey(parentNode) && this.nodeCollection.containsKey(childNodeName)){
 			return this.nodeCollection.get(parentNode).add(childNodeName);
