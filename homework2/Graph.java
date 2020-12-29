@@ -63,7 +63,7 @@ public class Graph<T> {
    	 * @effects Adds the edge into the graph (adds new object).
    	 * @modifies this object.
    	 * @return true if added the child 
-   	 **/// as
+   	 **/
 	public Boolean addEdge(T parentNode, T childNodeName) {
 		checkRep();
 		if (this.nodeCollection.containsKey(parentNode) && this.nodeCollection.containsKey(childNodeName)){
@@ -88,7 +88,7 @@ public class Graph<T> {
      * @requires none
    	 * @effects none
    	 * @modifies none
-   	 **/
+   	 **/ 
 	public ArrayList<T> getChildren(T parentNode){
 		checkRep();
 		if (this.nodeCollection.containsKey(parentNode)) {
