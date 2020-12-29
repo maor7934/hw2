@@ -110,7 +110,7 @@ public class TestDriver {
   	private void createGraph(String graphName) {
   		
   		//TODO: Insert your code here.
-  		graphs.put(graphName,new Graph());
+  		graphs.put(graphName,new Graph<WeightedNode>());
   		// graphs.put(graphName, ___);
   		output.println("created graph "+graphName);
   	}//
@@ -131,9 +131,10 @@ public class TestDriver {
  	private void createNode(String nodeName, String cost) {
 
  		// TODO: Insert your code here.
- 		nodes.put(nodeName, new WeightedNode(nodeName,cost));
- 		// nodes.put(nodeName, ___);
- 		// output.println(...);
+ 		WeightedNode newNode = new WeightedNode(nodeName,Integer.parseInt(cost));
+ 		//nodes.put(nodeName, new WeightedNode(nodeName,cost));
+ 		nodes.put(nodeName, newNode);
+ 		output.println("created node "+nodeName+" with cost "+cost);
  		
   	}
 	
@@ -153,13 +154,18 @@ public class TestDriver {
   	private void addNode(String graphName, String nodeName) {
 
   		// TODO: Insert your code here.
-  		 
+  		Graph<WeightedNode> currentGraph = graphs.get(graphName);
+  		WeightedNode currentWNode = nodes.get(nodeName);
+  		if (currentGraph == null || currentWNode == null) {
+  			output.println("--E-- TestDriver::addNode: shoudn't get here! graph or node doesn't exists");
+  			return;
+  		}
+  		currentGraph.addNode(currentWNode);
   		// ___ = graphs.get(graphName);
   		// ___ = nodes.get(nodeName);
-  		// output.println(...);
+  		output.println("added node "+nodeName+" to "+graphName);
   		
   	}
-
 
   	private void addEdge(List<String> arguments) {
 
@@ -177,10 +183,19 @@ public class TestDriver {
 	private void addEdge(String graphName, String parentName, String childName) {
 		
 		// TODO: Insert your code here.
-		  
-		// ___ = graphs.get(graphName);
-		// ___ = nodes.get(parentName);
-		// ___ = nodes.get(childName);
+		
+		Graph<WeightedNode> currentGraph = graphs.get(graphName);
+		WeightedNode parentWNode  = nodes.get(parentName);
+		WeightedNode childWNode  = nodes.get(childName);
+  		if (currentGraph == null || parentWNode == null || childWNode == null) {
+  			output.println("--E-- TestDriver::addEdge: shoudn't get here! graph or p c node doesn't exists");
+  			return;
+  		}
+  		if (!currentGraph.addEdge(parentWNode, childWNode)) {
+  			output.println("--E-- TestDriver::addEdge: shoudn't get here! the graph doesn't contain the child");
+  			return;
+  		}
+  		output.println("added edge from "+parentName+" to "+childName+ " in "+graphName);
 		// output.println(...);
 
   	}
