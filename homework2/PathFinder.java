@@ -22,6 +22,11 @@ public class PathFinder<N,P extends Path<N,P>> {
 	public PathFinder(Graph<N> graph, ArrayList<P> start_points, ArrayList<P> end_points) {
 	
 	}
+	/**
+	 * @requires 
+	 * @effects returns the shortest path possible with the curretn graph, end
+	 * points, and start points
+	 */
 	public P FindShortestPath( ) {
 		
 	}
