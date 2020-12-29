@@ -160,10 +160,16 @@ public class TestDriver {
   			output.println("--E-- TestDriver::addNode: shoudn't get here! graph or node doesn't exists");
   			return;
   		}
-  		current_graph.addNode(current_node);
+  		try {
+			current_graph.addNode(current_node);
+			output.println("added node "+nodeName+" to "+graphName);
+		} catch (AlreadyHasNodeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
   		// ___ = graphs.get(graphName);
   		// ___ = nodes.get(nodeName);
-  		output.println("added node "+nodeName+" to "+graphName);
+  		
   		
   	}
 
@@ -191,11 +197,20 @@ public class TestDriver {
   			output.println("--E-- TestDriver::addEdge: shoudn't get here! graph or p c node doesn't exists");
   			return;
   		}
-  		if (!current_graph.addEdge(parent__node, child_node)) {
-  			output.println("--E-- TestDriver::addEdge: shoudn't get here! the graph doesn't contain the child");
-  			return;
-  		}
-  		output.println("added edge from "+parentName+" to "+childName+ " in "+graphName);
+  		try {
+			if (!current_graph.addEdge(parent__node, child_node)) {
+				output.println("--E-- TestDriver::addEdge: shoudn't get here! the graph doesn't contain the child");
+				return;
+			}
+			output.println("added edge from "+parentName+" to "+childName+ " in "+graphName);
+		} catch (AlreadyHasEdgeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NodeNotInGraphExpection e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  		
 		// output.println(...);
 
   	}
